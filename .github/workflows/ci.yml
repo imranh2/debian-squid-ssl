@@ -55,6 +55,7 @@ jobs:
         with:
           name: Latest-ish Stable Squid
           tag_name: latest-stable-squid
+          body: Debian Stable Squid packages with (Open)SSL and tproxy support. 
           files: |
             ./sb-tmp/squid*.deb
         env:
