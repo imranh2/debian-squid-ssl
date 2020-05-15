@@ -1,0 +1,50 @@
+name: "CI"
+
+on:
+  push:
+    branches: [ master ]
+  #schedule:
+  #  - cron:  '22 2 */5 * *' #2:22 every 5 days
+
+jobs:
+  build:
+    runs-on: debian-latest
+    steps:
+      # Check out repository under $GITHUB_WORKSPACE
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run script / Build debs
+        run: ./build-squid-ssl.sh
+
+      #- name: Create Release
+      #  id: create_release
+      #  uses: actions/create-release@v1
+      #  env:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #  with:
+      #    tag_name: latest-stable-squid
+      #    release_name: Latest Stable Squid
+      #    draft: false
+      #    prerelease: false
+
+      #- name: Upload Release Asset
+      #  id: upload-release-asset 
+      #  uses: actions/upload-release-asset@v1
+      #  env:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #  with:
+      #    upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+      #    asset_path: ./sb-tmp/squid*.deb
+      #    asset_name: ./sb-tmp/squid*.deb
+      #    asset_content_type: application/vnd.debian.binary-package
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Latest-ish Stable Squid
+          tag_name: latest-stable-squid
+          files: |
+            ./sb-tmp/squid*.deb
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
