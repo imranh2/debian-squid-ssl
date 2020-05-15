@@ -1,5 +1,5 @@
 sudo apt-get build-dep squid
-sudo apt-get install devscripts build-essential fakeroot libssl-dev
+sudo apt-get install devscripts build-essential fakeroot "libssl-dev|libssl1.0-dev"
 
 mkdir sb-tmp
 cd sb-tmp
@@ -24,7 +24,7 @@ DELIM
 
 patch squid*/debian/rules < squid-ssl.patch
 
-cd squid-4*
+cd squid*-*/
 
 export DEBEMAIL=ih@imranh.co.uk
 export DEBFULLNAME=Imran Hussain
