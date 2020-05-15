@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build Docker image that'll build our package
-        run: docker build .
+        run: docker build -t squid-builder .
 
       - name: Make the output folder
         run: mkdir sb-tmp
