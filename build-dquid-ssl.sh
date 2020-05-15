@@ -1,5 +1,5 @@
-sudo apt-get build-dep squid
-sudo apt-get install devscripts build-essential fakeroot "libssl-dev|libssl1.0-dev"
+sudo apt-get build-dep squid -y
+sudo apt-get install devscripts build-essential fakeroot "libssl-dev|libssl1.0-dev" -y
 
 mkdir sb-tmp
 cd sb-tmp
