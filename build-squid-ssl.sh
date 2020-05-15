@@ -1,8 +1,10 @@
 #!/bin/bash
 
+echo "Install squid build deps"
 sudo apt-get build-dep squid -y
 sudo apt-get install devscripts build-essential fakeroot "libssl-dev|libssl1.0-dev" -y
 
+echo "grab squid sources"
 mkdir sb-tmp
 cd sb-tmp
 apt-get source squid
@@ -24,6 +26,7 @@ cat > squid-ssl.patch << DELIM
 
 DELIM
 
+echo "Apply SSL build patch"
 patch squid*/debian/rules < squid-ssl.patch
 
 cd squid*-*/
@@ -33,4 +36,5 @@ export DEBFULLNAME=Imran Hussain
 
 dch -n "Rebuild with (Openm)SSL support."
 
+echo "Build!"
 debuild -us -uc -b
