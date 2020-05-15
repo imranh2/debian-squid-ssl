@@ -1,3 +1,5 @@
+#!/bin/bash
+
 sudo apt-get build-dep squid -y
 sudo apt-get install devscripts build-essential fakeroot "libssl-dev|libssl1.0-dev" -y
 

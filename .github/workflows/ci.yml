@@ -14,8 +14,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Run script / Build debs
-        run: ./build-squid-ssl.sh
+      - name: Build Docker image that'll build our package
+        run: docker build .
+
+      - name: Make the output folder
+        run: mkdir sb-tmp
+
+      - name: Run the build container
+        run: docker run -v $(pwd)/sb-tmp:/sb-tmp squid-builder
 
       #- name: Create Release
       #  id: create_release
