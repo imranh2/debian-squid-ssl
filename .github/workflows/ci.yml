@@ -3,8 +3,8 @@ name: "CI"
 on:
   push:
     branches: [ master ]
-  #schedule:
-  #  - cron:  '22 2 */5 * *' #2:22 every 5 days
+  schedule:
+    - cron:  '22 2 */5 * *' #2:22 every 5 days
 
 jobs:
   build:
@@ -44,6 +44,11 @@ jobs:
       #    asset_path: ./sb-tmp/squid*.deb
       #    asset_name: ./sb-tmp/squid*.deb
       #    asset_content_type: application/vnd.debian.binary-package
+
+      - name: Delete
+        uses: ame-yu/action-delete-latest-release@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
