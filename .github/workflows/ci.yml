@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: debian-latest
+    runs-on: ubuntu-latest
     steps:
       # Check out repository under $GITHUB_WORKSPACE
       - name: Checkout code
