@@ -32,14 +32,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: ncipollo/release-action@v1
         with:
           name: Latest-ish Stable Squid
           tag_name: latest-stable-squid
+          commit: master
+          allowUpdates: true
+          replacesArtifacts: true
           draft: false
           prerelease: false
           body: Debian Stable Squid packages with (Open)SSL and tproxy support. 
-          files: |
-            ./sb-tmp/squid*.deb
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          artifacts: "./sb-tmp/squid*.deb"
+          artifactContentType: application/x-debian-package
+          token: ${{ secrets.GITHUB_TOKEN }}
