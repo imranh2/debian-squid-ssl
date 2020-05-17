@@ -45,10 +45,13 @@ jobs:
       #    asset_name: ./sb-tmp/squid*.deb
       #    asset_content_type: application/vnd.debian.binary-package
 
-      - name: Delete
-        uses: ame-yu/action-delete-latest-release@v2
+      - name: Delete release and tag
+        uses: dev-drprasad/delete-tag-and-release@v0.1.1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          delete_release: true
+          tag_name: latest-stable-squid
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
